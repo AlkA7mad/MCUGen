@@ -10,7 +10,7 @@ import {
 } from "../../constants/gpioOptions";
 import type { PinConfigProps } from "../../constants/PinConfig.types";
 import Dropdown from "../Dropdown/Dropdown";
-import styles from "./PinConfig.module.scss"
+import styles from "./PinConfig.module.scss";
 
 function PinConfig({ pin, onChange, onRemove }: PinConfigProps) {
   return (
@@ -44,22 +44,29 @@ function PinConfig({ pin, onChange, onRemove }: PinConfigProps) {
           value={pin.mode}
           onChange={(newMode) => onChange({ ...pin, mode: newMode })}
         />
-        <Dropdown
-          label="Output type"
-          options={outputTypeOptions}
-          value={pin.outputType}
-          onChange={(newOutputType) =>
-            onChange({ ...pin, outputType: newOutputType })
-          }
-        />
-        <Dropdown
-          label="Output speed"
-          options={outputSpeedOptions}
-          value={pin.outputSpeed}
-          onChange={(newOutputSpeed) =>
-            onChange({ ...pin, outputSpeed: newOutputSpeed })
-          }
-        />
+        {pin.mode === "OutputMode" ? (
+          <>
+            <Dropdown
+              label="Output type"
+              options={outputTypeOptions}
+              value={pin.outputType}
+              onChange={(newOutputType) =>
+                onChange({ ...pin, outputType: newOutputType })
+              }
+            />
+            <Dropdown
+              label="Output speed"
+              options={outputSpeedOptions}
+              value={pin.outputSpeed}
+              onChange={(newOutputSpeed) =>
+                onChange({ ...pin, outputSpeed: newOutputSpeed })
+              }
+            />{" "}
+          </>
+        ) : (
+          <p></p>
+        )}
+
         <Dropdown
           label="Pull type"
           options={pullTypeOptions}

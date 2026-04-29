@@ -9,7 +9,6 @@ interface CodeGenerationResult {
 export async function generateGpioCode(pins: PinData[]): Promise<CodeGenerationResult> {
     
     const payload = pins.map(p => ({...p, pin: Number(p.pin) }));
-    console.log(payload);
 
     const response = await fetch("http://localhost:5131/Gpio", {
         
@@ -17,12 +16,12 @@ export async function generateGpioCode(pins: PinData[]): Promise<CodeGenerationR
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
     });
-    console.log(response);
 
-    if (!response.ok) {
+    if (response.status >= 500) {
         throw new Error(`Server error: ${response.status}`);
     }
 
-    return response.json();
-    
+    const data: CodeGenerationResult = await response.json();
+
+    return data;
 }

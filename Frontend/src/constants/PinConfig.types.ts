@@ -6,6 +6,7 @@ export interface PinConfigProps {
 };
 
 export interface PinData {
+    id: string;
     port: string;
     pin: string;
     mode: string;

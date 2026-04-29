@@ -14,6 +14,12 @@ function Configurator() {
 
   async function handleGenerate() {
     try {
+
+      if (pins.length === 0) {
+        setErrors(["Add at least one pin before generating code"]);
+        return;
+      }
+      
       const result = await generateGpioCode(pins);
       if (result.success) {
         setGeneratedCode(result.generatedCode);
@@ -23,15 +29,20 @@ function Configurator() {
         setErrors(result.errors);
       }
 
-      if (pins.length === 0) {
-        setErrors(["Add at least one pin before generating code"]);
-        return;
-      }
     } catch (err) {
       setErrors([
         `Network error: ${err instanceof Error ? err.message : "unknown"}`,
       ]);
       setGeneratedCode("");
+    }
+  }
+
+  function handleRemove(pin: PinData) {
+    const newPins = pins.filter((p) => p.id !== pin.id);
+    setPins(newPins);
+    if (newPins.length === 0) {
+      setGeneratedCode("");
+      setErrors([]);
     }
   }
 
@@ -46,14 +57,14 @@ function Configurator() {
                 No pins configurated yet. click "Add Pin" to get started
               </div>
             ) : (
-              pins.map((pin, index) => (
+              pins.map((pin) => (
                 <PinConfig
-                  key={index}
+                  key={pin.id}
                   pin={pin}
                   onChange={(updatedPin) => {
-                    setPins(pins.map((p, i) => (i === index ? updatedPin : p)));
+                    setPins(pins.map((p) => (p.id === pin.id ? updatedPin : p)));
                   }}
-                  onRemove={() => setPins(pins.filter((_, i) => i !== index))}
+                  onRemove={ () => handleRemove(pin)}
                 />
               ))
             )}
@@ -62,7 +73,7 @@ function Configurator() {
           <div className={styles.actions}>
             <button
               className={styles.button}
-              onClick={() => setPins([...pins, defaultPin])}
+              onClick={() => setPins([...pins, { ...defaultPin, id: crypto.randomUUID()}])}
             >
               Add Pin
             </button>
@@ -82,7 +93,7 @@ function Configurator() {
               <pre className={styles.code}>{generatedCode}</pre>
             ) : (
               <div className={styles.placeholder}>
-                // Your initialization code will appear here
+                
               </div>
             )}
 

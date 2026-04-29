@@ -37,7 +37,7 @@ export const pullTypeOptions = [
     { label: "Pull-down", value: "PullDown" }
 ]
 
-export const defaultPin: PinData = {
+export const defaultPin: Omit<PinData, "id"> = {
     port: "A",
     pin: "0",
     mode: "InputMode",
