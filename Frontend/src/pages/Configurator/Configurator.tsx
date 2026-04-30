@@ -5,21 +5,24 @@ import PinConfig from "../../components/PinConfig/PinConfig";
 import type { PinData } from "../../constants/PinConfig.types";
 import { defaultPin } from "../../constants/gpioOptions";
 import { generateGpioCode } from "../../api/gpioAPI";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 import styles from "./Configurator.module.scss";
 
 function Configurator() {
   const [pins, setPins] = useState<PinData[]>([]);
   const [generatedCode, setGeneratedCode] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleGenerate() {
     try {
-
       if (pins.length === 0) {
         setErrors(["Add at least one pin before generating code"]);
         return;
       }
-      
+
+      setIsLoading(true);
+
       const result = await generateGpioCode(pins);
       if (result.success) {
         setGeneratedCode(result.generatedCode);
@@ -28,12 +31,13 @@ function Configurator() {
         setGeneratedCode("");
         setErrors(result.errors);
       }
-
     } catch (err) {
       setErrors([
         `Network error: ${err instanceof Error ? err.message : "unknown"}`,
       ]);
       setGeneratedCode("");
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -62,9 +66,11 @@ function Configurator() {
                   key={pin.id}
                   pin={pin}
                   onChange={(updatedPin) => {
-                    setPins(pins.map((p) => (p.id === pin.id ? updatedPin : p)));
+                    setPins(
+                      pins.map((p) => (p.id === pin.id ? updatedPin : p)),
+                    );
                   }}
-                  onRemove={ () => handleRemove(pin)}
+                  onRemove={() => handleRemove(pin)}
                 />
               ))
             )}
@@ -73,13 +79,17 @@ function Configurator() {
           <div className={styles.actions}>
             <button
               className={styles.button}
-              onClick={() => setPins([...pins, { ...defaultPin, id: crypto.randomUUID()}])}
+              onClick={() =>
+                setPins([...pins, { ...defaultPin, id: crypto.randomUUID() }])
+              }
+              disabled={isLoading}
             >
               Add Pin
             </button>
             <button
               className={`${styles.button} ${styles.primaryButton}`}
               onClick={handleGenerate}
+              disabled={isLoading}
             >
               Generate Code
             </button>
@@ -89,12 +99,12 @@ function Configurator() {
         <div className={styles.right}>
           <div className={styles.codePanel}>
             <div className={styles.panelLabel}>Generated Code</div>
-            {generatedCode ? (
+            {isLoading ? (
+              <LoadingSpinner />
+            ) : generatedCode ? (
               <pre className={styles.code}>{generatedCode}</pre>
             ) : (
-              <div className={styles.placeholder}>
-                
-              </div>
+              <div className={styles.placeholder}></div>
             )}
 
             {errors.length > 0 && (

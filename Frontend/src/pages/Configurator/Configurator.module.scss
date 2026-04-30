@@ -98,6 +98,11 @@
   &:active {
     transform: translateY(1px);
   }
+
+  &:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  }
 }
  
 .primaryButton {
@@ -118,6 +123,11 @@
       0 0 0 1px rgba(117, 37, 139, 0.5),
       0 12px 34px rgba(117, 37, 139, 0.5),
       0 0 60px rgba(236, 72, 153, 0.3);
+  }
+  
+  &:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
   }
 }
  
