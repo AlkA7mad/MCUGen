@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Options;
-using MCUGen.Api.Services;
+using MCUGen.Api.Services.GpioCodeGenerator;
 
 var builder = WebApplication.CreateBuilder(args);
 

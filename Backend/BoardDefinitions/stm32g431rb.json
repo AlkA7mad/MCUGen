@@ -1,0 +1,112 @@
+{
+  "$schema": "stm32-board-model/v1.0",
+
+  "board": {
+    "id": "NUCLEO-G431RB",
+    "name": "NUCLEO-G431RB",
+    "mcu": "STM32G431RBT6",
+    "package": "LQFP64",
+    "defaultReservedPins": {
+      "PA13": "SWDIO",
+      "PA14": "SWCLK",
+      "PA5":  "USER_LED_LD2",
+      "PC13": "USER_BUTTON_B1",
+      "PC14": "OSC32_IN",
+      "PC15": "OSC32_OUT"
+    }
+  },
+
+  "gpio": {
+    "ports": {
+      "GPIOA": {
+        "baseAddress": "0x48000000",
+        "pins": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+      },
+      "GPIOB": {
+        "baseAddress": "0x48000400",
+        "pins": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+      },
+      "GPIOC": {
+        "baseAddress": "0x48000800",
+        "pins": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+      },
+      "GPIOD": {
+        "baseAddress": "0x48000C00",
+        "pins": [2]
+      },
+      "GPIOF": {
+        "baseAddress": "0x48001400",
+        "pins": [0,1]
+      },
+      "GPIOG": {
+        "baseAddress": "0x48001800",
+        "pins": [10]
+      }
+    },
+
+    "modes": ["input", "output", "alternate", "analog"],
+    "outputTypes": ["push_pull", "open_drain"],
+    "speeds": ["low", "medium", "high", "very_high"],
+    "pulls": ["none", "pull_up", "pull_down"]
+  },
+
+  "pins": {
+    "PA0":  { "position": 8,  "fiveVTolerant": false, "analog": ["ADC1_IN1","ADC2_IN1"],           "af": { "1":"TIM2_CH1",    "7":"USART2_CTS",   "15":"EVENTOUT" }},
+    "PA1":  { "position": 9,  "fiveVTolerant": false, "analog": ["ADC1_IN2","ADC2_IN2"],           "af": { "1":"TIM2_CH2",    "7":"USART2_RTS",   "9":"TIM15_CH1N", "15":"EVENTOUT" }},
+    "PA2":  { "position": 10, "fiveVTolerant": false, "analog": ["ADC1_IN3"],                      "af": { "1":"TIM2_CH3",    "3":"TIM15_CH1",    "7":"USART2_TX",  "8":"LPUART1_TX", "15":"EVENTOUT" }},
+    "PA3":  { "position": 11, "fiveVTolerant": false, "analog": ["ADC1_IN4"],                      "af": { "1":"TIM2_CH4",    "3":"TIM15_CH2",    "7":"USART2_RX",  "8":"LPUART1_RX", "15":"EVENTOUT" }},
+    "PA4":  { "position": 12, "fiveVTolerant": false, "analog": ["ADC2_IN17","DAC1_OUT1"],         "af": { "2":"TIM3_CH2",    "5":"SPI1_NSS",     "6":"SPI3_NSS",   "7":"USART2_CK",  "15":"EVENTOUT" }},
+    "PA5":  { "position": 13, "fiveVTolerant": false, "analog": ["ADC2_IN13","DAC1_OUT2"],         "af": { "1":"TIM2_CH1",    "5":"SPI1_SCK",     "15":"EVENTOUT" }},
+    "PA6":  { "position": 14, "fiveVTolerant": true,  "analog": ["ADC2_IN3"],                      "af": { "1":"TIM16_CH1",   "2":"TIM3_CH1",     "4":"TIM1_BKIN",  "5":"SPI1_MISO",  "7":"USART3_CTS", "15":"EVENTOUT" }},
+    "PA7":  { "position": 15, "fiveVTolerant": true,  "analog": ["ADC2_IN4"],                      "af": { "1":"TIM17_CH1",   "2":"TIM3_CH2",     "4":"TIM1_CH1N",  "5":"SPI1_MOSI",  "6":"TIM8_CH1N",  "15":"EVENTOUT" }},
+    "PA8":  { "position": 31, "fiveVTolerant": true,  "analog": [],                                "af": { "0":"MCO",         "1":"TIM1_CH1",     "4":"I2C3_SCL",   "7":"USART1_CK",  "13":"SAI1_SCK_A","15":"EVENTOUT" }},
+    "PA9":  { "position": 32, "fiveVTolerant": true,  "analog": [],                                "af": { "1":"TIM1_CH2",    "2":"TIM2_CH3",     "5":"I2C2_SCL",   "7":"USART1_TX",  "15":"EVENTOUT" }},
+    "PA10": { "position": 33, "fiveVTolerant": true,  "analog": [],                                "af": { "1":"TIM1_CH3",    "2":"TIM2_CH4",     "7":"USART1_RX",  "10":"SAI1_D1",   "15":"EVENTOUT" }},
+    "PA11": { "position": 34, "fiveVTolerant": true,  "analog": [],                                "af": { "1":"TIM1_CH1N",   "2":"TIM4_CH1",     "6":"TIM1_CH4",   "7":"USART1_CTS", "9":"FDCAN1_RX",  "10":"USB_DM",  "15":"EVENTOUT" }},
+    "PA12": { "position": 35, "fiveVTolerant": true,  "analog": [],                                "af": { "1":"TIM1_CH2N",   "2":"TIM4_CH2",     "6":"TIM16_CH1",  "7":"USART1_RTS", "9":"FDCAN1_TX",  "10":"USB_DP",  "15":"EVENTOUT" }},
+    "PA13": { "position": 36, "fiveVTolerant": true,  "analog": [],                                "af": { "0":"SWDIO",       "1":"TIM4_CH3",     "5":"SPI1_SCK",   "7":"USART3_CTS", "10":"SAI1_SD_B", "15":"EVENTOUT" }},
+    "PA14": { "position": 37, "fiveVTolerant": true,  "analog": [],                                "af": { "0":"SWCLK",       "1":"TIM1_BKIN",    "3":"TIM8_CH2",   "4":"I2C1_SDA",   "7":"USART2_TX",  "15":"EVENTOUT" }},
+    "PA15": { "position": 38, "fiveVTolerant": true,  "analog": [],                                "af": { "0":"JTDI",        "1":"TIM2_CH1",     "2":"TIM8_CH1",   "4":"I2C1_SCL",   "5":"SPI1_NSS",   "6":"SPI3_NSS", "7":"USART2_RX", "15":"EVENTOUT" }},
+
+    "PB0":  { "position": 16, "fiveVTolerant": true,  "analog": ["ADC1_IN15","ADC2_IN15"],         "af": { "1":"TIM1_CH2N",   "2":"TIM3_CH3",     "3":"TIM8_CH2N",  "15":"EVENTOUT" }},
+    "PB1":  { "position": 17, "fiveVTolerant": true,  "analog": ["ADC1_IN12"],                     "af": { "1":"TIM1_CH3N",   "2":"TIM3_CH4",     "3":"TIM8_CH3N",  "8":"LPUART1_RTS","15":"EVENTOUT" }},
+    "PB2":  { "position": 18, "fiveVTolerant": true,  "analog": ["ADC2_IN12"],                     "af": { "3":"LPTIM1_OUT",  "15":"EVENTOUT" }},
+    "PB3":  { "position": 43, "fiveVTolerant": true,  "analog": [],                                "af": { "0":"SWO",         "1":"TIM2_CH2",     "5":"SPI1_SCK",   "6":"SPI3_SCK",   "7":"USART2_TX",  "10":"SAI1_SCK_B","15":"EVENTOUT" }},
+    "PB4":  { "position": 44, "fiveVTolerant": true,  "analog": [],                                "af": { "0":"NJTRST",      "1":"TIM16_CH1",    "2":"TIM3_CH1",   "5":"SPI1_MISO",  "6":"SPI3_MISO",  "7":"USART2_RX",  "15":"EVENTOUT" }},
+    "PB5":  { "position": 45, "fiveVTolerant": true,  "analog": [],                                "af": { "1":"TIM16_BKIN",  "2":"TIM3_CH2",     "4":"I2C1_SMBA",  "5":"SPI1_MOSI",  "6":"SPI3_MOSI",  "7":"USART2_CK",  "10":"SAI1_SD_B","15":"EVENTOUT" }},
+    "PB6":  { "position": 46, "fiveVTolerant": true,  "analog": [],                                "af": { "1":"TIM16_CH1N",  "2":"TIM4_CH1",     "4":"I2C1_SCL",   "7":"USART1_TX",  "8":"LPTIM1_ETR", "10":"SAI1_FS_B","15":"EVENTOUT" }},
+    "PB7":  { "position": 47, "fiveVTolerant": true,  "analog": [],                                "af": { "1":"TIM17_CH1N",  "2":"TIM4_CH2",     "3":"TIM3_CH4",   "4":"I2C1_SDA",   "7":"USART1_RX",  "15":"EVENTOUT" }},
+    "PB8":  { "position": 49, "fiveVTolerant": true,  "analog": [],                                "af": { "1":"TIM16_CH1",   "2":"TIM4_CH3",     "4":"I2C1_SCL",   "6":"TIM8_CH2",   "7":"USART3_RX",  "9":"FDCAN1_RX",  "12":"SAI1_MCLK_A","15":"EVENTOUT" }},
+    "PB9":  { "position": 50, "fiveVTolerant": true,  "analog": [],                                "af": { "1":"TIM17_CH1",   "2":"TIM4_CH4",     "4":"I2C1_SDA",   "6":"TIM8_CH3",   "7":"USART3_TX",  "9":"FDCAN1_TX",  "11":"IR_OUT",  "15":"EVENTOUT" }},
+    "PB10": { "position": 19, "fiveVTolerant": true,  "analog": [],                                "af": { "1":"TIM2_CH3",    "4":"I2C2_SCL",     "5":"SPI2_SCK",   "7":"USART3_TX",  "8":"LPUART1_RX", "11":"SAI1_SCK_A","15":"EVENTOUT" }},
+    "PB11": { "position": 20, "fiveVTolerant": true,  "analog": ["ADC1_IN14","ADC2_IN14"],         "af": { "1":"TIM2_CH4",    "4":"I2C2_SDA",     "7":"USART3_RX",  "8":"LPUART1_TX", "15":"EVENTOUT" }},
+    "PB12": { "position": 23, "fiveVTolerant": true,  "analog": ["ADC1_IN11","ADC2_IN11"],         "af": { "1":"TIM1_BKIN",   "4":"I2C2_SMBA",    "5":"SPI2_NSS",   "7":"USART3_CK",  "8":"LPUART1_RTS","15":"EVENTOUT" }},
+    "PB13": { "position": 24, "fiveVTolerant": true,  "analog": ["ADC1_IN10"],                     "af": { "1":"TIM1_CH1N",   "5":"SPI2_SCK",     "7":"USART3_CTS", "8":"LPUART1_CTS","15":"EVENTOUT" }},
+    "PB14": { "position": 25, "fiveVTolerant": true,  "analog": ["ADC1_IN5"],                      "af": { "1":"TIM15_CH1",   "2":"TIM1_CH2N",    "5":"SPI2_MISO",  "6":"TIM8_CH2N",  "7":"USART3_RTS", "15":"EVENTOUT" }},
+    "PB15": { "position": 26, "fiveVTolerant": true,  "analog": ["ADC2_IN15"],                     "af": { "1":"TIM15_CH2",   "2":"TIM15_CH1N",   "4":"TIM1_CH3N",  "5":"SPI2_MOSI",  "15":"EVENTOUT" }},
+
+    "PC0":  { "position": 53, "fiveVTolerant": false, "analog": ["ADC1_IN6","ADC2_IN6"],           "af": { "1":"TIM1_CH1",    "2":"LPTIM1_IN1",   "8":"LPUART1_RX", "15":"EVENTOUT" }},
+    "PC1":  { "position": 54, "fiveVTolerant": false, "analog": ["ADC1_IN7","ADC2_IN7"],           "af": { "1":"TIM1_CH2",    "2":"LPTIM1_OUT",   "4":"I2C3_SDA",   "8":"LPUART1_TX", "15":"EVENTOUT" }},
+    "PC2":  { "position": 55, "fiveVTolerant": false, "analog": ["ADC1_IN8","ADC2_IN8"],           "af": { "1":"TIM1_CH3",    "2":"LPTIM1_IN2",   "5":"SPI2_MISO",  "6":"COMP3_OUT",  "15":"EVENTOUT" }},
+    "PC3":  { "position": 56, "fiveVTolerant": false, "analog": ["ADC1_IN9","ADC2_IN9"],           "af": { "1":"TIM1_CH4",    "2":"TIM1_BKIN2",   "5":"SPI2_MOSI",  "6":"SAI1_SD_A",  "15":"EVENTOUT" }},
+    "PC4":  { "position": 57, "fiveVTolerant": true,  "analog": ["ADC2_IN5"],                      "af": { "1":"TIM1_ETR",    "2":"I2C2_SCL",     "7":"USART1_TX",  "15":"EVENTOUT" }},
+    "PC5":  { "position": 58, "fiveVTolerant": true,  "analog": ["ADC2_IN11"],                     "af": { "1":"TIM15_BKIN",  "2":"TIM1_CH4N",    "7":"USART1_RX",  "15":"EVENTOUT" }},
+    "PC6":  { "position": 27, "fiveVTolerant": true,  "analog": [],                                "af": { "1":"TIM3_CH1",    "2":"TIM8_CH1",     "4":"I2C4_SCL",   "6":"SAI1_MCLK_A","15":"EVENTOUT" }},
+    "PC7":  { "position": 28, "fiveVTolerant": true,  "analog": [],                                "af": { "1":"TIM3_CH2",    "2":"TIM8_CH2",     "4":"I2C4_SDA",   "15":"EVENTOUT" }},
+    "PC8":  { "position": 29, "fiveVTolerant": true,  "analog": [],                                "af": { "1":"TIM3_CH3",    "2":"TIM8_CH3",     "4":"I2C3_SCL",   "15":"EVENTOUT" }},
+    "PC9":  { "position": 30, "fiveVTolerant": true,  "analog": [],                                "af": { "1":"TIM3_CH4",    "2":"TIM8_CH4",     "3":"TIM8_BKIN2", "4":"I2C3_SDA",   "6":"TIM1_CH1",   "15":"EVENTOUT" }},
+    "PC10": { "position": 39, "fiveVTolerant": true,  "analog": [],                                "af": { "5":"SPI3_SCK",    "7":"USART3_TX",    "8":"UART4_TX",   "15":"EVENTOUT" }},
+    "PC11": { "position": 40, "fiveVTolerant": true,  "analog": [],                                "af": { "5":"SPI3_MISO",   "7":"USART3_RX",    "8":"UART4_RX",   "15":"EVENTOUT" }},
+    "PC12": { "position": 41, "fiveVTolerant": true,  "analog": [],                                "af": { "5":"SPI3_MOSI",   "7":"USART3_CK",    "8":"UART5_TX",   "15":"EVENTOUT" }},
+    "PC13": { "position": 2,  "fiveVTolerant": false, "analog": [],                                "af": { "1":"TIM1_BKIN",   "2":"TIM1_CH1N",    "15":"EVENTOUT" }},
+    "PC14": { "position": 3,  "fiveVTolerant": false, "analog": [],                                "af": {},  "fixed": "OSC32_IN" },
+    "PC15": { "position": 4,  "fiveVTolerant": false, "analog": [],                                "af": {},  "fixed": "OSC32_OUT" },
+
+    "PD2":  { "position": 42, "fiveVTolerant": true,  "analog": [],                                "af": { "1":"TIM3_ETR",    "2":"TIM8_BKIN",    "8":"UART5_RX",   "15":"EVENTOUT" }},
+
+    "PF0":  { "position": 5,  "fiveVTolerant": true,  "analog": [],                                "af": { "4":"I2C2_SDA",    "5":"SPI2_NSS",     "6":"TIM1_CH3N",  "15":"EVENTOUT" }},
+    "PF1":  { "position": 6,  "fiveVTolerant": true,  "analog": [],                                "af": { "4":"I2C2_SCL",    "5":"SPI2_SCK",     "15":"EVENTOUT" }},
+
+    "PG10": { "position": 7,  "fiveVTolerant": false, "analog": [],                                "af": {},  "fixed": "NRST" }
+  }
+}

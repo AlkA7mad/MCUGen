@@ -1,7 +1,7 @@
 using MCUGen.Api.DTOs;
 using MCUGen.Api.Models;
 
-namespace MCUGen.Api.Services;
+namespace MCUGen.Api.Services.GpioCodeGenerator;
 
 public interface IGpioCodeGeneratorService
 {

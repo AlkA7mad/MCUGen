@@ -2,7 +2,7 @@ using MCUGen.Api.Models;
 using System.Text;
 using MCUGen.Api.DTOs;
 
-namespace MCUGen.Api.Services;
+namespace MCUGen.Api.Services.GpioCodeGenerator;
 
 public class GpioCodeGeneratorService : IGpioCodeGeneratorService
 {

@@ -1,7 +1,7 @@
 using MCUGen.Api.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using MCUGen.Api.Models;
-using MCUGen.Api.Services;
+using MCUGen.Api.Services.GpioCodeGenerator;
 
 namespace MCUGen.Api.Controllers;
 
