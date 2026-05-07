@@ -20,27 +20,21 @@ public class GpioCodeGeneratorService : IGpioCodeGeneratorService
         StringBuilder stringBuilder = new StringBuilder("// Please include CMSIS file of your STM32 Board\n");
         stringBuilder.AppendLine("// GPIO configuration\n");
 
-        // Enable GPIO Clocks
         EnableClock(stringBuilder, distinctPorts);
 
-        // Configure MODER
         ConfigureModer(stringBuilder, gpioConfig);
         
         if (gpioConfig.Any(x => x.Mode == PinMode.OutputMode))
         {
-            // Configure OTYPER
             ConfigureOtyper(stringBuilder, gpioConfig);
-        
-            // Configure OSPEEDR
+            
             ConfigureOspeedr(stringBuilder, gpioConfig);
         }
         
-        // Configure PUPDR
         ConfigurePupdr(stringBuilder, gpioConfig);
 
         if (gpioConfig.Any(x => x.Mode == PinMode.AlternateFunction))
         {
-            // Configure AF
             ConfigureAlternateFunction(stringBuilder, gpioConfig);
         }
 
@@ -150,11 +144,8 @@ public class GpioCodeGeneratorService : IGpioCodeGeneratorService
         // Validation only for STM32 Nucleo G431RB (temp solution)
         CodeGenerationResult codeGenerationResult =  new CodeGenerationResult();
 
-        // Define allowed ports
         var allowedPorts = new List<char> { 'A',  'B', 'C', 'D', 'a', 'b', 'c', 'd' };
-        // Define allowed pin range
         var allowedPins = Enumerable.Range(0, 16).ToList();
-        // Define duplicates
         var duplicates = gpioConfig
             .GroupBy(x => new { x.Port, x.Pin})
             .Any(y => y.Count() > 1);
