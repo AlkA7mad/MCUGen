@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using MCUGen.Api.Services.Board;
 using Microsoft.Extensions.Options;
 using MCUGen.Api.Services.GpioCodeGenerator;
 
@@ -22,6 +23,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<IGpioCodeGeneratorService, GpioCodeGeneratorService>();
+builder.Services.AddSingleton<IBoardService, BoardService>();
 
 var app = builder.Build();
 
