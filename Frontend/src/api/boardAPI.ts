@@ -15,8 +15,6 @@ export async function getBoards(): Promise<Board[]> {
     }
 
     const data: Board[] = await response.json();
-
-    console.log(data);
-
+    
     return data;
 }
