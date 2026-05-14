@@ -1,4 +1,4 @@
-import type { PinData } from "../constants/PinConfig.types";
+import type { PinData } from "../constants/PinConfig.type";
 
 interface CodeGenerationResult {
     success: boolean;

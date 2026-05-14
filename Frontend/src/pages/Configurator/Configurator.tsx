@@ -1,14 +1,18 @@
-// Configurator.tsx
-
 import { useEffect, useState } from "react";
+
 import PinConfig from "../../components/PinConfig/PinConfig";
-import type { PinData } from "../../constants/PinConfig.types";
-import { defaultPin } from "../../constants/gpioOptions";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+
+import type { BoardData } from "../../constants/boardData.type";
+import type { GpioDropdownOptions } from "../../constants/boardData.type";
+import type { PinData } from "../../constants/PinConfig.type";
+import { defaultPin } from "../../constants/PinConfig.type";
+
 import { generateGpioCode } from "../../api/gpioAPI";
 import { getBoardData } from "../../api/boardAPI";
-import type { BoardData, GpioOptions } from "../../constants/boardData.type";
-import type { GpioDropdownOptions } from "../../constants/options.type";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+
+import { transformOptions } from "../../utils/transformOptions";
+
 import styles from "./Configurator.module.scss";
 
 function Configurator() {
@@ -20,12 +24,12 @@ function Configurator() {
   const [options, setOptions] = useState<GpioDropdownOptions | null>(null);
 
   useEffect(() => {
-    async function laodBoardDate() {
+    async function laodBoardData() {
       const data = await getBoardData("NUCLEO-G431RB");
       setBoardData(data);
       setOptions(transformOptions(data.gpio));
     }
-    laodBoardDate();
+    laodBoardData();
   }, []);
 
   async function handleGenerate() {
@@ -62,36 +66,6 @@ function Configurator() {
       setGeneratedCode("");
       setErrors([]);
     }
-  }
-
-  function transformOptions(gpio: GpioOptions) {
-    const modes = gpio.modes.map((m) => ({
-      label: splitPascalCase(m),
-      value: m,
-    }));
-    const outputTypes = gpio.outputTypes.map((t) => ({
-      label: splitPascalCase(t),
-      value: t,
-    }));
-    const speeds = gpio.speeds.map((s) => ({
-      label: splitPascalCase(s),
-      value: s,
-    }));
-    const pulls = gpio.pulls.map((p) => ({
-      label: splitPascalCase(p),
-      value: p,
-    }));
-
-    const ports = Object.keys(gpio.ports).map((key) => ({
-      label: key.replace("GPIO", "Port "),
-      value: key.replace("GPIO", ""),
-    }));
-
-    return { modes, outputTypes, speeds, pulls, ports };
-  }
-
-  function splitPascalCase(str: string): string {
-    return str.replace(/([a-z])([A-Z])/g, "$1 $2");
   }
 
   return (

@@ -1,4 +1,17 @@
 
+interface DropdownOption {
+  label: string;
+  value: string;
+}
+
+export interface GpioDropdownOptions {
+  modes: DropdownOption[];
+  outputTypes: DropdownOption[];
+  speeds: DropdownOption[];
+  pulls: DropdownOption[];
+  ports: DropdownOption[];
+}
+
 export interface BoardData {
     board: BoardDetails;
     gpio: GpioOptions;
@@ -25,7 +38,7 @@ export interface GpioOptions {
 }
 
 export interface PinInfo {
-    position: BigInteger;
+    position: number;
     fiveVTolerant: boolean;
     analog: string[];
     af: { [key: string]: string};
@@ -33,5 +46,5 @@ export interface PinInfo {
 
 export interface PortInfo {
     baseAddress: string;
-    pins: BigInteger[];
+    pins: number[];
 }

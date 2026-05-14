@@ -1,5 +1,4 @@
-import type { PortInfo } from "./boardData.type";
-import type { GpioDropdownOptions } from "./options.type";
+import type { PortInfo, GpioDropdownOptions } from "./boardData.type";
 
 export interface PinConfigProps {
     pin: PinData;
@@ -17,4 +16,13 @@ export interface PinData {
     outputType: string;
     outputSpeed: string;
     pullType: string;
+};
+
+export const defaultPin: Omit<PinData, "id"> = {
+  port: "A",
+  pin: "0",
+  mode: "Input",
+  outputType: "PushPull",
+  outputSpeed: "Low",
+  pullType: "None"
 };

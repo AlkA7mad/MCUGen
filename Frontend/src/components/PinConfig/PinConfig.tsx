@@ -1,15 +1,22 @@
-// PinConfig.tsx
-
-import type { PinConfigProps } from "../../constants/PinConfig.types";
 import Dropdown from "../Dropdown/Dropdown";
+
+import type { PinConfigProps } from "../../constants/PinConfig.type";
+
 import styles from "./PinConfig.module.scss";
 
-function PinConfig({ pin, options, ports, onChange, onRemove }: PinConfigProps) {
+function PinConfig({
+  pin,
+  options,
+  ports,
+  onChange,
+  onRemove,
+}: PinConfigProps) {
   const portKey = `GPIO${pin.port}`;
-  const pinOptions = ports[portKey]?.pins.map(p => ({
-    label: p.toString(),
-    value: p.toString()
-  })) ?? [];
+  const pinOptions =
+    ports[portKey]?.pins.map((p) => ({
+      label: p.toString(),
+      value: p.toString(),
+    })) ?? [];
 
   return (
     <div className={styles.card}>
@@ -42,7 +49,7 @@ function PinConfig({ pin, options, ports, onChange, onRemove }: PinConfigProps) 
           value={pin.mode}
           onChange={(newMode) => onChange({ ...pin, mode: newMode })}
         />
-        {pin.mode === "Output" ? (
+        {pin.mode === "Output" && (
           <>
             <Dropdown
               label="Output type"
@@ -61,8 +68,6 @@ function PinConfig({ pin, options, ports, onChange, onRemove }: PinConfigProps) 
               }
             />{" "}
           </>
-        ) : (
-          <p></p>
         )}
 
         <Dropdown
