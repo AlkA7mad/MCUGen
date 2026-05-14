@@ -1,18 +1,16 @@
 // PinConfig.tsx
 
-import {
-  modeOptions,
-  outputSpeedOptions,
-  outputTypeOptions,
-  pinOptions,
-  portOptions,
-  pullTypeOptions,
-} from "../../constants/gpioOptions";
 import type { PinConfigProps } from "../../constants/PinConfig.types";
 import Dropdown from "../Dropdown/Dropdown";
 import styles from "./PinConfig.module.scss";
 
-function PinConfig({ pin, onChange, onRemove }: PinConfigProps) {
+function PinConfig({ pin, options, ports, onChange, onRemove }: PinConfigProps) {
+  const portKey = `GPIO${pin.port}`;
+  const pinOptions = ports[portKey]?.pins.map(p => ({
+    label: p.toString(),
+    value: p.toString()
+  })) ?? [];
+
   return (
     <div className={styles.card}>
       <div className={styles.header}>
@@ -28,7 +26,7 @@ function PinConfig({ pin, onChange, onRemove }: PinConfigProps) {
       <div className={styles.grid}>
         <Dropdown
           label="Port"
-          options={portOptions}
+          options={options.ports}
           value={pin.port}
           onChange={(newPort) => onChange({ ...pin, port: newPort })}
         />
@@ -40,15 +38,15 @@ function PinConfig({ pin, onChange, onRemove }: PinConfigProps) {
         />
         <Dropdown
           label="Mode"
-          options={modeOptions}
+          options={options.modes}
           value={pin.mode}
           onChange={(newMode) => onChange({ ...pin, mode: newMode })}
         />
-        {pin.mode === "OutputMode" ? (
+        {pin.mode === "Output" ? (
           <>
             <Dropdown
               label="Output type"
-              options={outputTypeOptions}
+              options={options.outputTypes}
               value={pin.outputType}
               onChange={(newOutputType) =>
                 onChange({ ...pin, outputType: newOutputType })
@@ -56,7 +54,7 @@ function PinConfig({ pin, onChange, onRemove }: PinConfigProps) {
             />
             <Dropdown
               label="Output speed"
-              options={outputSpeedOptions}
+              options={options.speeds}
               value={pin.outputSpeed}
               onChange={(newOutputSpeed) =>
                 onChange({ ...pin, outputSpeed: newOutputSpeed })
@@ -69,7 +67,7 @@ function PinConfig({ pin, onChange, onRemove }: PinConfigProps) {
 
         <Dropdown
           label="Pull type"
-          options={pullTypeOptions}
+          options={options.pulls}
           value={pin.pullType}
           onChange={(newPullType) =>
             onChange({ ...pin, pullType: newPullType })

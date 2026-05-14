@@ -12,11 +12,11 @@ export interface Board {
     package: string;
 }
 
-interface BoardDetails extends Board {
+export interface BoardDetails extends Board {
     defaultReservedPins: { [key: string]: string};
 }
 
-interface GpioOptions {
+export interface GpioOptions {
     ports: { [key: string]: PortInfo};
     modes: string[];
     outputTypes: string[];
@@ -24,14 +24,14 @@ interface GpioOptions {
     pulls: string[];
 }
 
-interface PinInfo {
+export interface PinInfo {
     position: BigInteger;
     fiveVTolerant: boolean;
     analog: string[];
     af: { [key: string]: string};
 }
 
-interface PortInfo {
+export interface PortInfo {
     baseAddress: string;
     pins: BigInteger[];
 }
