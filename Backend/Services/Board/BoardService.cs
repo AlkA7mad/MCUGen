@@ -31,7 +31,13 @@ public class BoardService : IBoardService
         }
         
         string content = File.ReadAllText(_boardFilePaths[boardId]);
-        return JsonSerializer.Deserialize<BoardDataModel>(content, _options);
+        BoardDataModel data = JsonSerializer.Deserialize<BoardDataModel>(content, _options);
+
+        if (data == null)
+        {
+            throw new InvalidOperationException($"Something went wrong with {boardId}");
+        }
+        return data;
     }
 
     private void LoadBoards()

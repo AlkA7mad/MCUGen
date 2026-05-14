@@ -26,6 +26,10 @@ public class BoardController: ControllerBase
     [HttpGet("{id}/options")]
     public ActionResult<BoardData> GetBoardData(string id)
     {
+        if (string.IsNullOrEmpty(id))
+        {
+            return BadRequest("Board ID must be provided.");
+        }
         try
         {
             return Ok(_boardService.GetBoardData(id));
@@ -33,6 +37,10 @@ public class BoardController: ControllerBase
         catch (KeyNotFoundException)
         {
             return NotFound(new { message = $"Board '{id}' not found." });
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, new { message = "Failed to load board data." });
         }
     }
 }
