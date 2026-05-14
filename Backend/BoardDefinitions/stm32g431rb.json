@@ -44,7 +44,7 @@
       }
     },
 
-    "modes": ["Input", "Output", "Alternate", "Analog"],
+    "modes": ["Input", "Output", "AlternateFunction", "Analog"],
     "outputTypes": ["PushPull", "OpenDrain"],
     "speeds": ["Low", "Medium", "High", "VeryHigh"],
     "pulls": ["None", "PullUp", "PullDown"]
