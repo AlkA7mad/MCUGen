@@ -2,7 +2,7 @@ namespace MCUGen.Api.Models.Enum;
 
 public enum PullType
 {
-    NoPull,
+    None,
     PullUp,
-    PullDown,
+    PullDown
 }

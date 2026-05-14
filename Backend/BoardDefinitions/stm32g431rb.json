@@ -44,10 +44,10 @@
       }
     },
 
-    "modes": ["input", "output", "alternate", "analog"],
-    "outputTypes": ["push_pull", "open_drain"],
-    "speeds": ["low", "medium", "high", "very_high"],
-    "pulls": ["none", "pull_up", "pull_down"]
+    "modes": ["Input", "Output", "Alternate", "Analog"],
+    "outputTypes": ["PushPull", "OpenDrain"],
+    "speeds": ["Low", "Medium", "High", "VeryHigh"],
+    "pulls": ["None", "PullUp", "PullDown"]
   },
 
   "pins": {

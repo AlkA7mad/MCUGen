@@ -24,7 +24,7 @@ public class GpioCodeGeneratorService : IGpioCodeGeneratorService
 
         ConfigureModer(stringBuilder, gpioConfig);
         
-        if (gpioConfig.Any(x => x.Mode == PinMode.OutputMode))
+        if (gpioConfig.Any(x => x.Mode == PinMode.Output))
         {
             ConfigureOtyper(stringBuilder, gpioConfig);
             
@@ -85,7 +85,7 @@ public class GpioCodeGeneratorService : IGpioCodeGeneratorService
         foreach (var config in gpioConfig)
         {
             var port = config.Port.ToString().ToUpper();
-            if (config.Mode == PinMode.OutputMode)
+            if (config.Mode == PinMode.Output)
             {
                 sb.AppendLine($"// Set GPIO{port} output type | Pin = {config.Pin}");
                 sb.AppendLine($"GPIO{port}->OTYPER &= ~(1U << ({config.Pin}U));");
@@ -104,7 +104,7 @@ public class GpioCodeGeneratorService : IGpioCodeGeneratorService
         {
             var port = config.Port.ToString().ToUpper();
             
-            if (config.OutputSpeed != null && config.Mode == PinMode.OutputMode)
+            if (config.OutputSpeed != null && config.Mode == PinMode.Output)
             {
                 sb.AppendLine($"// Set GPIO{port} port speed | Pin = {config.Pin}");
                 sb.AppendLine($"GPIO{port}->OSPEEDR &= ~(3U << ({config.Pin}U * 2U));");

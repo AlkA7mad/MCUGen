@@ -2,8 +2,8 @@ namespace MCUGen.Api.Models;
 
 public enum PinMode
 {
-    InputMode,
-    OutputMode,
+    Input,
+    Output,
     AlternateFunction,
-    AnalogMode
+    Analog
 }
